@@ -15,7 +15,7 @@ const Home = ({ navigation }) => {
             <View style={styles.bannerContainer}>
                 <Image
                     source={{
-                        uri: "https://cdni.iconscout.com/illustration/premium/thumb/q-and-a-service-3678714-3098907.png?f=webp",
+                        uri: "https://cdni.iconscout.com/illustration/premium/thumb/online-question-answer-5651149-4714812.png",
                     }}
                     style={styles.banner}
                     resizeMode="contain"
