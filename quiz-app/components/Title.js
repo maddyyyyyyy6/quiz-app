@@ -4,7 +4,7 @@ import React from 'react'
 const Title = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Quizzier</Text>
+      <Text style={styles.title}>Brain Busters</Text>
     </View>
   )
 }
