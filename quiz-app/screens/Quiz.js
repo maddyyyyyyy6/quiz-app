@@ -45,7 +45,7 @@ const Quiz = ({ navigation }) => {
     const handleSelection = (_option) => {
         let result = _option === questions[questionNumber]?.correct_answer;
         if (result) {
-            setScore(score + 10);
+            setScore(score + 1);
         }
         if (questionNumber !== 9) goToNext();
     };

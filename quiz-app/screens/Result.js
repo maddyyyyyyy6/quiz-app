@@ -25,7 +25,7 @@ const Result = ({ navigation, route }) => {
                     You've completed the quiz!
                 </Text>
                 <Text style={styles.scoreText}>{score}</Text>
-                <Text style={styles.resultText}>out of 100</Text>
+                <Text style={styles.resultText}>out of 10</Text>
                 <Text style={styles.thanks}>
                     Thanks for taking the quiz! We hope you enjoyed it and
                     learned something new.
