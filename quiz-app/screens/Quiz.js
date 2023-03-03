@@ -3,6 +3,14 @@ import React from "react";
 import Button from "../components/Button";
 import { useState, useEffect } from "react";
 
+// function to shuffle the array of answers
+const shuffleArr = (array) => {
+    for (var i = array.length - 1; i > 0; i--) {
+        var rand = Math.floor(Math.random() * (i + 1));
+        [array[i], array[rand]] = [array[rand], array[i]];
+    }
+};
+
 const Quiz = ({ navigation }) => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
@@ -15,6 +23,7 @@ const Quiz = ({ navigation }) => {
         const res = await fetch(url);
         const response = await res.json();
         setQuestions(response.results);
+        generateAndShuffleAnswers(response.results[0]);
     };
 
     const changeQuestion = (where) => {
@@ -31,15 +40,14 @@ const Quiz = ({ navigation }) => {
         }
     };
 
-    const combineMultipleQuestions = () => {
-        const array_answers = questions[questionNumber]?.incorrect_answers;
-        if (array_answers) {
-            const correct_answer = questions[questionNumber]?.correct_answer;
-            let randomIndex = Math.floor(Math.random() * (answers.length + 1));
-            array_answers.splice(randomIndex, 0, correct_answer);
-            setAnswers(array_answers);
-            console.log(array_answers);
-        }
+    const generateAndShuffleAnswers = (_answers) => {
+        let _options = [..._answers.incorrect_answers];
+        let correct_answer = _answers.correct_answer;
+        _options.push(correct_answer);
+        console.log(_options);
+        shuffleArr(_options);
+        setAnswers(_options);
+        console.log(_options);
     };
 
     // console.log(questions[questionNumber]?.correct_answer);
@@ -50,12 +58,10 @@ const Quiz = ({ navigation }) => {
     useEffect(() => {
         if (questionNumber == 9) {
             setIsLastQuestion(true);
-            combineMultipleQuestions();
         }
 
         if (questionNumber < 9) {
             setIsLastQuestion(false);
-            combineMultipleQuestions();
         }
     }, [questionNumber]);
 
