@@ -13,7 +13,7 @@ const shuffleArr = (array) => {
 
 const Quiz = ({ navigation }) => {
     const [questions, setQuestions] = useState([]);
-    const [answers, setAnswers] = useState([]);
+    const [options, setOptions] = useState([]);
     const [questionNumber, setQuestionsNumber] = useState(0);
     const [isLastQuestion, setIsLastQuestion] = useState(false);
     const getQuiz = async () => {
@@ -31,14 +31,18 @@ const Quiz = ({ navigation }) => {
         generateAndShuffleAnswers(questions[questionNumber + 1]);
     };
 
+    // handle select
+    const handleSelection = (_option) => {
+        console.log(_option);
+        console.log(_option === questions[questionNumber].correct_answer);
+    };
+
     const generateAndShuffleAnswers = (_answers) => {
         let _options = [..._answers.incorrect_answers];
         let correct_answer = _answers.correct_answer;
         _options.push(correct_answer);
-        console.log(_options);
         shuffleArr(_options);
-        setAnswers(_options);
-        console.log(_options);
+        setOptions(_options);
     };
 
     // console.log(questions[questionNumber]?.correct_answer);
@@ -49,10 +53,6 @@ const Quiz = ({ navigation }) => {
     useEffect(() => {
         if (questionNumber == 9) {
             setIsLastQuestion(true);
-        }
-
-        if (questionNumber < 9) {
-            setIsLastQuestion(false);
         }
     }, [questionNumber]);
 
@@ -69,24 +69,36 @@ const Quiz = ({ navigation }) => {
                         </Text>
                     </View>
                     <View style={styles.options}>
-                        <TouchableOpacity style={styles.optionButton}>
+                        <TouchableOpacity
+                            style={styles.optionButton}
+                            onPress={() => handleSelection(options[0])}
+                        >
                             <Text style={styles.option}>
-                                {decodeURIComponent(answers[0])}
+                                {decodeURIComponent(options[0])}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.optionButton}>
+                        <TouchableOpacity
+                            style={styles.optionButton}
+                            onPress={() => handleSelection(options[1])}
+                        >
                             <Text style={styles.option}>
-                                {decodeURIComponent(answers[1])}
+                                {decodeURIComponent(options[1])}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.optionButton}>
+                        <TouchableOpacity
+                            style={styles.optionButton}
+                            onPress={() => handleSelection(options[2])}
+                        >
                             <Text style={styles.option}>
-                                {decodeURIComponent(answers[2])}
+                                {decodeURIComponent(options[2])}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.optionButton}>
+                        <TouchableOpacity
+                            style={styles.optionButton}
+                            onPress={() => handleSelection(options[3])}
+                        >
                             <Text style={styles.option}>
-                                {decodeURIComponent(answers[3])}
+                                {decodeURIComponent(options[3])}
                             </Text>
                         </TouchableOpacity>
                     </View>
