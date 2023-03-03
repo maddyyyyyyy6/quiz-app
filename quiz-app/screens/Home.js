@@ -29,6 +29,7 @@ const Home = ({ navigation }) => {
             >
                 <Text style={styles.notionbutton}>START</Text>
             </TouchableOpacity>
+            <Text style={styles.versionText}>Version 1.0.1</Text>
         </View>
     );
 };
@@ -65,5 +66,10 @@ const styles = StyleSheet.create({
         paddingVertical: 7,
         paddingHorizontal: 9,
         fontFamily: "",
+    },
+    versionText: {
+        fontSize: 11,
+        color: "#2b2d42",
+        textAlign: "center",
     },
 });
