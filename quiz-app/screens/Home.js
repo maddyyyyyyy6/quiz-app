@@ -11,7 +11,7 @@ import Title from "../components/Title";
 const Home = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <Title />
+            <Title text="Brain Busters" />
             <View style={styles.bannerContainer}>
                 <Image
                     source={{
@@ -23,10 +23,6 @@ const Home = ({ navigation }) => {
             </View>
             <TouchableOpacity
                 onPress={() => {
-                    ToastAndroid.show(
-                        "A pikachu appeared nearby !",
-                        ToastAndroid.SHORT
-                    );
                     navigation.navigate("Quiz");
                 }}
                 style={styles.notionlayout}
