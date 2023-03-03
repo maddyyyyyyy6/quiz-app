@@ -78,19 +78,26 @@ const Quiz = ({ navigation }) => {
                         </Text>
                     </View>
                     <View style={styles.options}>
-                        {answers &&
-                            answers.map((ques) => {
-                                return (
-                                    <TouchableOpacity
-                                        style={styles.optionButton}
-                                        id={ques.ques}
-                                    >
-                                        <Text style={styles.option}>
-                                            {decodeURIComponent(ques)}
-                                        </Text>
-                                    </TouchableOpacity>
-                                );
-                            })}
+                        <TouchableOpacity style={styles.optionButton}>
+                            <Text style={styles.option}>
+                                {decodeURIComponent(answers[0])}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.optionButton}>
+                            <Text style={styles.option}>
+                                {decodeURIComponent(answers[1])}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.optionButton}>
+                            <Text style={styles.option}>
+                                {decodeURIComponent(answers[2])}
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.optionButton}>
+                            <Text style={styles.option}>
+                                {decodeURIComponent(answers[3])}
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.bottom}>
                         <TouchableOpacity
