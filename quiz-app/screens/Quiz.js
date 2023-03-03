@@ -70,7 +70,9 @@ const Quiz = ({ navigation }) => {
                             }
                         )}
                         <TouchableOpacity style={styles.optionButton}>
-                            <Text style={styles.option}>{questions[questionNumber]?.correct_answer}</Text>
+                            <Text style={styles.option}>
+                                {questions[questionNumber]?.correct_answer}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.bottom}>
@@ -80,20 +82,25 @@ const Quiz = ({ navigation }) => {
                         >
                             <Text style={styles.notionbutton}>SKIP</Text>
                         </TouchableOpacity>
-                        {isLastQuestion && (
+                        {isLastQuestion ? (
                             <TouchableOpacity
                                 style={styles.notionlayout.red}
                                 onPress={() => navigation.navigate("Result")}
                             >
-                                <Text style={styles.notionbutton}>END</Text>
+                                <Text style={styles.notionbutton}>
+                                    END Quiz
+                                </Text>
+                            </TouchableOpacity>
+                        ) : (
+                            <TouchableOpacity
+                                onPress={() => changeQuestion("next")}
+                                style={styles.notionlayout}
+                            >
+                                <Text style={styles.notionbutton}>NEXT</Text>
                             </TouchableOpacity>
                         )}
-                        <TouchableOpacity
-                            onPress={() => changeQuestion("next")}
-                            style={styles.notionlayout}
-                        >
-                            <Text style={styles.notionbutton}>NEXT</Text>
-                        </TouchableOpacity>
+
+                        {/* hide next button and show end button when question number is the last */}
                     </View>
                 </>
             )}
