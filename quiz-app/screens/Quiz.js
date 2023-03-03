@@ -66,7 +66,9 @@ const Quiz = ({ navigation }) => {
                     <View style={styles.top}>
                         <Text style={styles.question}>
                             Q.{questionNumber + 1}{" "}
-                            {questions[questionNumber]?.question}
+                            {decodeURIComponent(
+                                questions[questionNumber]?.question
+                            )}
                         </Text>
                     </View>
                     <View style={styles.options}>
@@ -75,9 +77,10 @@ const Quiz = ({ navigation }) => {
                                 return (
                                     <TouchableOpacity
                                         style={styles.optionButton}
+                                        id={ques.ques}
                                     >
                                         <Text style={styles.option}>
-                                            {ques}
+                                            {decodeURIComponent(ques)}
                                         </Text>
                                     </TouchableOpacity>
                                 );
