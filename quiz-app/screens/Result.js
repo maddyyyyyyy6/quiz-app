@@ -21,12 +21,12 @@ const Result = ({ navigation, route }) => {
             </View>
             <View style={styles.resultsContainer}>
                 <Text style={styles.resultText}>Congratulations!🎉🎉🎉</Text>
-                <Text style={styles.resultText.h2}>
+                <Text style={styles.resultText}>
                     You've completed the quiz!
                 </Text>
-                <Text style={styles.resultText.scoreText}>{score}</Text>
+                <Text style={styles.scoreText}>{score}</Text>
                 <Text style={styles.resultText}>out of 100</Text>
-                <Text style={styles.resultText.thanks}>
+                <Text style={styles.thanks}>
                     Thanks for taking the quiz! We hope you enjoyed it and
                     learned something new.
                 </Text>
@@ -70,22 +70,22 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    heading: {
+        color: "#495057",
+        fontSize: 15,
+    },
+    scoreText: {
+        color: "#6C757D",
+        fontSize: 90,
+    },
+    thanks: {
+        textAlign: "center",
+        fontSize: 11,
+        textDecorationStyle: "dashed",
+    },
     resultText: {
         fontSize: 20,
         color: "#495057",
-        h2: {
-            color: "#495057",
-            fontSize: 15,
-        },
-        scoreText: {
-            color: "#6C757D",
-            fontSize: 90,
-        },
-        thanks: {
-            textAlign: "center",
-            fontSize: 11,
-            textDecorationStyle: "dashed",
-        },
     },
     notionlayout: {
         backgroundColor: "#000",

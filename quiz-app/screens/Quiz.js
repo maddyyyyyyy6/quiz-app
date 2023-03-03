@@ -26,7 +26,7 @@ const Quiz = ({ navigation }) => {
     const getQuiz = async () => {
         // const url = "https://opentdb.com/api.php?amount=10&type=multiple";
         const url =
-            "https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple&encode=url3986";
+            "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple&encode=url3986";
         const res = await fetch(url);
         const response = await res.json();
         setQuestions(response.results);
@@ -43,7 +43,7 @@ const Quiz = ({ navigation }) => {
 
     // handle select
     const handleSelection = (_option) => {
-        let result = _option === questions[questionNumber].correct_answer;
+        let result = _option === questions[questionNumber]?.correct_answer;
         if (result) {
             setScore(score + 10);
         }
@@ -57,11 +57,13 @@ const Quiz = ({ navigation }) => {
     };
 
     const generateAndShuffleAnswers = (_answers) => {
-        let _options = [..._answers.incorrect_answers];
-        let correct_answer = _answers.correct_answer;
-        _options.push(correct_answer);
-        shuffleArr(_options);
-        setOptions(_options);
+        if (_answers) {
+            let _options = [..._answers?.incorrect_answers];
+            let correct_answer = _answers?.correct_answer;
+            _options.push(correct_answer);
+            shuffleArr(_options);
+            setOptions(_options);
+        }
     };
 
     useEffect(() => {
