@@ -26,17 +26,10 @@ const Quiz = ({ navigation }) => {
         generateAndShuffleAnswers(response.results[0]);
     };
 
-    const changeQuestion = (where) => {
+    const handleNextPress = () => {
         let lastindex = questions.length - 1;
-        if (where == "next") {
-            if (questionNumber < lastindex) {
-                setQuestionsNumber(questionNumber + 1);
-            }
-        }
-        if (where == "previous") {
-            if (questionNumber > 0) {
-                setQuestionsNumber(questionNumber - 1);
-            }
+        if (questionNumber < lastindex) {
+            setQuestionsNumber(questionNumber + 1);
         }
     };
 
@@ -117,7 +110,7 @@ const Quiz = ({ navigation }) => {
                             </TouchableOpacity>
                         ) : (
                             <TouchableOpacity
-                                onPress={() => changeQuestion("next")}
+                                onPress={() => handleNextPress()}
                                 style={styles.notionlayout}
                             >
                                 <Text style={styles.notionbutton}>NEXT</Text>
