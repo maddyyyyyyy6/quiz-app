@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "quiz-app",
-    "slug": "quiz-app",
-    "version": "1.0.0",
+    "name": "brain-busters",
+    "slug": "brain-busters",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "maddycoder.apps.brainbusters"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "918e3586-f603-4745-990b-b0aef6b26fb4"
+      }
     }
   }
 }
