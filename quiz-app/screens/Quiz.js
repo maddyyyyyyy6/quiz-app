@@ -22,6 +22,7 @@ const Quiz = ({ navigation }) => {
     const [options, setOptions] = useState([]);
     const [questionNumber, setQuestionsNumber] = useState(0);
     const [isLastQuestion, setIsLastQuestion] = useState(false);
+    const [score, setScore] = useState(0);
     const getQuiz = async () => {
         // const url = "https://opentdb.com/api.php?amount=10&type=multiple";
         const url =
@@ -33,6 +34,9 @@ const Quiz = ({ navigation }) => {
     };
 
     const handleNextPress = () => {
+        goToNext();
+    };
+    const goToNext = () => {
         setQuestionsNumber(questionNumber + 1);
         generateAndShuffleAnswers(questions[questionNumber + 1]);
     };
@@ -41,8 +45,17 @@ const Quiz = ({ navigation }) => {
     const handleSelection = (_option) => {
         let result = _option === questions[questionNumber].correct_answer;
         if (result) {
-            ToastAndroid.show("Correct!🎉🎉🎉", ToastAndroid.SHORT);
-        } else ToastAndroid.show("Wrong!", ToastAndroid.SHORT);
+            setScore(score + 10);
+        }
+        if (questionNumber !== 9) goToNext();
+
+        console.log(score);
+    };
+
+    const showResults = () => {
+        navigation.navigate("Result", {
+            score: score,
+        });
     };
 
     const generateAndShuffleAnswers = (_answers) => {
@@ -111,19 +124,13 @@ const Quiz = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.bottom}>
-                        <TouchableOpacity
-                            onPress={() => null}
-                            style={styles.notionlayout}
-                        >
-                            <Text style={styles.notionbutton}>SKIP</Text>
-                        </TouchableOpacity>
                         {isLastQuestion ? (
                             <TouchableOpacity
-                                style={styles.notionlayout.red}
-                                onPress={() => navigation.navigate("Result")}
+                                style={styles.notionlayout.blue}
+                                onPress={() => showResults()}
                             >
                                 <Text style={styles.notionbutton}>
-                                    END Quiz
+                                    Show Results
                                 </Text>
                             </TouchableOpacity>
                         ) : (
@@ -131,7 +138,7 @@ const Quiz = ({ navigation }) => {
                                 onPress={() => handleNextPress()}
                                 style={styles.notionlayout}
                             >
-                                <Text style={styles.notionbutton}>NEXT</Text>
+                                <Text style={styles.notionbutton}>SKIP</Text>
                             </TouchableOpacity>
                         )}
 
@@ -181,8 +188,8 @@ const styles = StyleSheet.create({
         borderRadius: 12,
     },
     notionlayout: {
-        red: {
-            backgroundColor: "red",
+        blue: {
+            backgroundColor: "#81F7E5",
             borderRadius: 9,
             alignItems: "center",
             justifyContent: "center",
