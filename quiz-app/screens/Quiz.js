@@ -125,11 +125,14 @@ const Quiz = ({ navigation }) => {
                     <View style={styles.bottom}>
                         {isLastQuestion ? (
                             <TouchableOpacity
-                                style={styles.notionlayout.blue}
+                                style={[
+                                    styles.notionlayout.blue,
+                                    styles.notionlayout,
+                                ]}
                                 onPress={() => showResults()}
                             >
                                 <Text style={styles.notionbutton}>
-                                    Show Results
+                                    Show Result
                                 </Text>
                             </TouchableOpacity>
                         ) : (
@@ -188,23 +191,23 @@ const styles = StyleSheet.create({
     },
     notionlayout: {
         blue: {
-            backgroundColor: "#81F7E5",
+            backgroundColor: "#264653",
             borderRadius: 9,
             alignItems: "center",
             justifyContent: "center",
         },
         backgroundColor: "#000",
-        borderRadius: 9,
+        borderRadius: 15,
         // width: 70,
         alignItems: "center",
         justifyContent: "center",
     },
     notionbutton: {
         color: "white",
-        fontSize: 20,
-        fontWeight: "bold",
-        paddingVertical: 7,
-        paddingHorizontal: 9,
+        fontSize: 18,
+        fontWeight: "semibold",
+        paddingVertical: 13,
+        paddingHorizontal: 16,
         fontFamily: "",
     },
 });
