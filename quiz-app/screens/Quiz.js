@@ -48,8 +48,6 @@ const Quiz = ({ navigation }) => {
             setScore(score + 10);
         }
         if (questionNumber !== 9) goToNext();
-
-        console.log(score);
     };
 
     const showResults = () => {
@@ -66,7 +64,6 @@ const Quiz = ({ navigation }) => {
         setOptions(_options);
     };
 
-    // console.log(questions[questionNumber]?.correct_answer);
     useEffect(() => {
         getQuiz();
     }, []);
