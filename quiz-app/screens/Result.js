@@ -1,27 +1,45 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import Button from "../components/Button";
+import Title from "../components/Title";
 
 const Result = ({ navigation, route }) => {
     const { score } = route.params;
-    console.log("scores", score);
     return (
         <View style={styles.container}>
             <View>
-                <Text>Result</Text>
+                <Title text="Result" />
             </View>
             <View style={styles.bannerContainer}>
                 <Image
                     source={{
-                        uri: "https://cdni.iconscout.com/illustration/premium/thumb/q-and-a-service-3678714-3098907.png?f=webp",
+                        uri: "https://cdni.iconscout.com/illustration/premium/thumb/exams-result-976748.png?f=webp",
                     }}
                     style={styles.banner}
                     resizeMode="contain"
                 />
-                <Text>{score}</Text>
+            </View>
+            <View style={styles.resultsContainer}>
+                <Text style={styles.resultText}>Congratulations!🎉🎉🎉</Text>
+                <Text style={styles.resultText.h2}>
+                    You've completed the quiz!
+                </Text>
+                <Text style={styles.resultText.scoreText}>{score}</Text>
+                <Text style={styles.resultText}>out of 100</Text>
+                <Text style={styles.resultText.thanks}>
+                    Thanks for taking the quiz! We hope you enjoyed it and
+                    learned something new.
+                </Text>
             </View>
             <View>
-                <Button text="Home" navigate={navigation.navigate} to="Home" />
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.navigate("Home");
+                    }}
+                    style={styles.notionlayout}
+                >
+                    <Text style={styles.notionbutton}>HOME</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -33,6 +51,7 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 31,
         paddingHorizontal: 16,
+        height: "100%",
     },
     bannerContainer: {
         justifyContent: "center",
@@ -41,5 +60,48 @@ const styles = StyleSheet.create({
     banner: {
         height: 300,
         width: 300,
+    },
+
+    resultsContainer: {
+        flex: 1,
+        width: "100%",
+        borderRadius: 20,
+        borderWidth: 3,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    resultText: {
+        fontSize: 20,
+        color: "#495057",
+        h2: {
+            color: "#495057",
+            fontSize: 15,
+        },
+        scoreText: {
+            color: "#6C757D",
+            fontSize: 90,
+        },
+        thanks: {
+            textAlign: "center",
+            fontSize: 11,
+            textDecorationStyle: "dashed",
+        },
+    },
+    notionlayout: {
+        backgroundColor: "#000",
+        borderRadius: 11,
+        // width: 70,
+        alignItems: "center",
+        justifyContent: "center",
+        marginVertical: 10,
+    },
+    notionbutton: {
+        color: "white",
+        fontSize: 18,
+        fontWeight: "medium",
+        paddingVertical: 15,
+        paddingHorizontal: 9,
+        elevation: 20,
+        shadowColor: "red",
     },
 });
