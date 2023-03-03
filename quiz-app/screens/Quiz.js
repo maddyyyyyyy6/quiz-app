@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 const Quiz = ({ navigation }) => {
     const [questions, setQuestions] = useState([]);
+    const [answers, setAnswers] = useState([]);
     const [questionNumber, setQuestionsNumber] = useState(0);
     const [isLastQuestion, setIsLastQuestion] = useState(false);
     const getQuiz = async () => {
@@ -30,7 +31,18 @@ const Quiz = ({ navigation }) => {
         }
     };
 
-    console.log(questions[questionNumber]?.correct_answer);
+    const combineMultipleQuestions = () => {
+        const array_answers = questions[questionNumber]?.incorrect_answers;
+        if (array_answers) {
+            const correct_answer = questions[questionNumber]?.correct_answer;
+            let randomIndex = Math.floor(Math.random() * (answers.length + 1));
+            array_answers.splice(randomIndex, 0, correct_answer);
+            setAnswers(array_answers);
+            console.log(array_answers);
+        }
+    };
+
+    // console.log(questions[questionNumber]?.correct_answer);
     useEffect(() => {
         getQuiz();
     }, []);
@@ -38,10 +50,12 @@ const Quiz = ({ navigation }) => {
     useEffect(() => {
         if (questionNumber == 9) {
             setIsLastQuestion(true);
+            combineMultipleQuestions();
         }
 
         if (questionNumber < 9) {
             setIsLastQuestion(false);
+            combineMultipleQuestions();
         }
     }, [questionNumber]);
 
@@ -56,8 +70,8 @@ const Quiz = ({ navigation }) => {
                         </Text>
                     </View>
                     <View style={styles.options}>
-                        {questions[questionNumber]?.incorrect_answers.map(
-                            (ques) => {
+                        {answers &&
+                            answers.map((ques) => {
                                 return (
                                     <TouchableOpacity
                                         style={styles.optionButton}
@@ -67,13 +81,7 @@ const Quiz = ({ navigation }) => {
                                         </Text>
                                     </TouchableOpacity>
                                 );
-                            }
-                        )}
-                        <TouchableOpacity style={styles.optionButton}>
-                            <Text style={styles.option}>
-                                {questions[questionNumber]?.correct_answer}
-                            </Text>
-                        </TouchableOpacity>
+                            })}
                     </View>
                     <View style={styles.bottom}>
                         <TouchableOpacity
