@@ -27,10 +27,8 @@ const Quiz = ({ navigation }) => {
     };
 
     const handleNextPress = () => {
-        let lastindex = questions.length - 1;
-        if (questionNumber < lastindex) {
-            setQuestionsNumber(questionNumber + 1);
-        }
+        setQuestionsNumber(questionNumber + 1);
+        generateAndShuffleAnswers(questions[questionNumber + 1]);
     };
 
     const generateAndShuffleAnswers = (_answers) => {
@@ -94,7 +92,7 @@ const Quiz = ({ navigation }) => {
                     </View>
                     <View style={styles.bottom}>
                         <TouchableOpacity
-                            onPress={() => changeQuestion("previous")}
+                            onPress={() => null}
                             style={styles.notionlayout}
                         >
                             <Text style={styles.notionbutton}>SKIP</Text>
