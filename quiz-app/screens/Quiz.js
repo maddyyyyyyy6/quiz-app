@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    ToastAndroid,
+} from "react-native";
 import React from "react";
 import Button from "../components/Button";
 import { useState, useEffect } from "react";
@@ -33,8 +39,10 @@ const Quiz = ({ navigation }) => {
 
     // handle select
     const handleSelection = (_option) => {
-        console.log(_option);
-        console.log(_option === questions[questionNumber].correct_answer);
+        let result = _option === questions[questionNumber].correct_answer;
+        if (result) {
+            ToastAndroid.show("Correct!🎉🎉🎉", ToastAndroid.SHORT);
+        } else ToastAndroid.show("Wrong!", ToastAndroid.SHORT);
     };
 
     const generateAndShuffleAnswers = (_answers) => {
