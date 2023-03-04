@@ -24,16 +24,25 @@ const Quiz = ({ navigation, route }) => {
     const [isLastQuestion, setIsLastQuestion] = useState(false);
     const [score, setScore] = useState(0);
     const { category, difficulty, type } = route.params;
-    if(route.params) {
-        
-        console.log(category);
-        console.log(difficulty);
-        console.log(type);
-    } 
+
+    const makeURL = () => {
+        _category = "";
+        _difficulty = "";
+        _type = "";
+        if (category != "any") _category = `&category=${category}`;
+        if (difficulty != "any") _difficulty = `&difficulty=${difficulty}`;
+        if (type != "any") _type = `&type=${type}`;
+        let _difficulty = `&difficulty=${difficulty}`;
+        let _type = `&type=${type}`;
+        let url = `https://opentdb.com/api.php?amount=10${_category}${_difficulty}${_type}&encode=url3986`;
+        return url;
+    };
     const getQuiz = async () => {
         // const url = "https://opentdb.com/api.php?amount=10&type=multiple";
-        const url =
-            "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple&encode=url3986";
+        // const url =
+        //     "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple&encode=url3986";
+        const url = makeURL();
+        console.log(url);
         const res = await fetch(url);
         const response = await res.json();
         setQuestions(response.results);
