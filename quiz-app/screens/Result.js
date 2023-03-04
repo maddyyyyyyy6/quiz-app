@@ -36,7 +36,7 @@ const Result = ({ navigation, route }) => {
                     onPress={() => {
                         navigation.navigate("Home");
                     }}
-                    style={styles.notionlayout}
+                    style={[styles.notionlayout, styles.shadowProp]}
                 >
                     <Text style={styles.notionbutton}>HOME</Text>
                 </TouchableOpacity>
@@ -72,24 +72,28 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#fff",
+        fontWeight: "bold",
     },
     heading: {
         color: "#495057",
         fontSize: 15,
+        fontFamily: "Inter_400Regular",
     },
     scoreText: {
         color: "#6C757D",
         fontSize: 90,
+        fontFamily: "Inter_400Regular",
     },
     thanks: {
         textAlign: "center",
         fontSize: 11,
         textDecorationStyle: "dashed",
+        fontFamily: "Inter_400Regular",
     },
     resultText: {
         fontSize: 20,
         color: "#495057",
-        fontFamily: "",
+        fontFamily: "Inter_400Regular",
     },
     notionlayout: {
         backgroundColor: "#000",

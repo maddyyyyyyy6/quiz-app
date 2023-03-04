@@ -128,6 +128,7 @@ const Quiz = ({ navigation }) => {
                                 style={[
                                     styles.notionlayout.blue,
                                     styles.notionlayout,
+                                    styles.shadowProp,
                                 ]}
                                 onPress={() => showResults()}
                             >
@@ -138,7 +139,7 @@ const Quiz = ({ navigation }) => {
                         ) : (
                             <TouchableOpacity
                                 onPress={() => handleNextPress()}
-                                style={styles.notionlayout}
+                                style={[styles.notionlayout, styles.shadowProp]}
                             >
                                 <Text style={styles.notionbutton}>SKIP</Text>
                             </TouchableOpacity>
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
     option: {
         fontSize: 20,
         color: "#fff",
-        fontWeight: "bold",
+        fontFamily: "Inter_400Regular",
     },
     optionButton: {
         paddingVertical: 12,
@@ -188,6 +189,7 @@ const styles = StyleSheet.create({
         marginVertical: 6,
         paddingHorizontal: 12,
         borderRadius: 12,
+        fontFamily: "Inter_400Regular",
     },
     notionlayout: {
         blue: {
@@ -209,5 +211,17 @@ const styles = StyleSheet.create({
         paddingVertical: 13,
         paddingHorizontal: 16,
         fontFamily: "",
+        fontFamily: "Inter_400Regular",
+    },
+    shadowProp: {
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: -1,
+            height: 0.5,
+        },
+        shadowOpacity: 0.05,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
 });
