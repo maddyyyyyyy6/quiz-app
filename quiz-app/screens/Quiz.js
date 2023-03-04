@@ -17,12 +17,19 @@ const shuffleArr = (array) => {
     }
 };
 
-const Quiz = ({ navigation }) => {
+const Quiz = ({ navigation, route }) => {
     const [questions, setQuestions] = useState([]);
     const [options, setOptions] = useState([]);
     const [questionNumber, setQuestionsNumber] = useState(0);
     const [isLastQuestion, setIsLastQuestion] = useState(false);
     const [score, setScore] = useState(0);
+    const { category, difficulty, type } = route.params;
+    if(route.params) {
+        
+        console.log(category);
+        console.log(difficulty);
+        console.log(type);
+    } 
     const getQuiz = async () => {
         // const url = "https://opentdb.com/api.php?amount=10&type=multiple";
         const url =
