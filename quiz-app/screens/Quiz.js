@@ -25,15 +25,13 @@ const Quiz = ({ navigation, route }) => {
     const [score, setScore] = useState(0);
     const { category, difficulty, type } = route.params;
 
-    const makeURL = () => {
+    const makeURL = (category_, difficulty_, type_) => {
         _category = "";
         _difficulty = "";
         _type = "";
-        if (category != "any") _category = `&category=${category}`;
-        if (difficulty != "any") _difficulty = `&difficulty=${difficulty}`;
-        if (type != "any") _type = `&type=${type}`;
-        let _difficulty = `&difficulty=${difficulty}`;
-        let _type = `&type=${type}`;
+        if (category_ != "any") _category = `&category=${category}`;
+        if (difficulty_ != "any") _difficulty = `&difficulty=${difficulty}`;
+        if (type_ != "any") _type = `&type=${type}`;
         let url = `https://opentdb.com/api.php?amount=10${_category}${_difficulty}${_type}&encode=url3986`;
         return url;
     };
@@ -41,8 +39,7 @@ const Quiz = ({ navigation, route }) => {
         // const url = "https://opentdb.com/api.php?amount=10&type=multiple";
         // const url =
         //     "https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple&encode=url3986";
-        const url = makeURL();
-        console.log(url);
+        const url = makeURL(category, difficulty, type);
         const res = await fetch(url);
         const response = await res.json();
         setQuestions(response.results);
