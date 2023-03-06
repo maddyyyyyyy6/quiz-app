@@ -3,6 +3,8 @@ import React from "react";
 import Button from "../components/Button";
 import Title from "../components/Title";
 
+// i am in skeletion branch
+
 const Result = ({ navigation, route }) => {
     const { score } = route.params;
     return (
