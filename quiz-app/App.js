@@ -9,15 +9,14 @@ export default function App() {
         </NavigationContainer>
     );
 }
+// i am in develop branch
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        // alignItems: 'center',
         paddingTop: 31,
         paddingHorizontal: 16,
-        // justifyContent: 'center',
     },
     text: {
         fontSize: 16,

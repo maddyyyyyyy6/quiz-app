@@ -3,6 +3,8 @@ import React from "react";
 import Button from "../components/Button";
 import Title from "../components/Title";
 
+// i am in skeletion branch
+
 const Result = ({ navigation, route }) => {
     const { score } = route.params;
     return (
@@ -19,14 +21,14 @@ const Result = ({ navigation, route }) => {
                     resizeMode="contain"
                 />
             </View>
-            <View style={styles.resultsContainer}>
+            <View style={[styles.resultsContainer, styles.shadowProp]}>
                 <Text style={styles.resultText}>Congratulations!🎉🎉🎉</Text>
-                <Text style={styles.resultText.h2}>
+                <Text style={styles.resultText}>
                     You've completed the quiz!
                 </Text>
-                <Text style={styles.resultText.scoreText}>{score}</Text>
-                <Text style={styles.resultText}>out of 100</Text>
-                <Text style={styles.resultText.thanks}>
+                <Text style={styles.scoreText}>{score}</Text>
+                <Text style={styles.resultText}>out of 10</Text>
+                <Text style={styles.thanks}>
                     Thanks for taking the quiz! We hope you enjoyed it and
                     learned something new.
                 </Text>
@@ -36,7 +38,7 @@ const Result = ({ navigation, route }) => {
                     onPress={() => {
                         navigation.navigate("Home");
                     }}
-                    style={styles.notionlayout}
+                    style={[styles.notionlayout, styles.shadowProp]}
                 >
                     <Text style={styles.notionbutton}>HOME</Text>
                 </TouchableOpacity>
@@ -52,40 +54,48 @@ const styles = StyleSheet.create({
         paddingTop: 31,
         paddingHorizontal: 16,
         height: "100%",
+        backgroundColor: "#fbfcfd",
     },
     bannerContainer: {
         justifyContent: "center",
         alignItems: "center",
     },
     banner: {
-        height: 300,
-        width: 300,
+        height: 190,
+        width: 190,
     },
 
     resultsContainer: {
         flex: 1,
         width: "100%",
-        borderRadius: 20,
-        borderWidth: 3,
+        borderRadius: 9,
+        borderWidth: 0.7,
+        borderColor: "#d7dbdf",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: "#fff",
+        fontWeight: "bold",
+    },
+    heading: {
+        color: "#495057",
+        fontSize: 15,
+        fontFamily: "Inter_400Regular",
+    },
+    scoreText: {
+        color: "#6C757D",
+        fontSize: 90,
+        fontFamily: "Inter_400Regular",
+    },
+    thanks: {
+        textAlign: "center",
+        fontSize: 11,
+        textDecorationStyle: "dashed",
+        fontFamily: "Inter_400Regular",
     },
     resultText: {
         fontSize: 20,
         color: "#495057",
-        h2: {
-            color: "#495057",
-            fontSize: 15,
-        },
-        scoreText: {
-            color: "#6C757D",
-            fontSize: 90,
-        },
-        thanks: {
-            textAlign: "center",
-            fontSize: 11,
-            textDecorationStyle: "dashed",
-        },
+        fontFamily: "Inter_400Regular",
     },
     notionlayout: {
         backgroundColor: "#000",
@@ -103,5 +113,16 @@ const styles = StyleSheet.create({
         paddingHorizontal: 9,
         elevation: 20,
         shadowColor: "red",
+    },
+    shadowProp: {
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: -1,
+            height: 0.5,
+        },
+        shadowOpacity: 0.05,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
 });
