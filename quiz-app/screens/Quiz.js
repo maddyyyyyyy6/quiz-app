@@ -6,8 +6,8 @@ import {
     ToastAndroid,
 } from "react-native";
 import React from "react";
-import Button from "../components/Button";
 import { useState, useEffect } from "react";
+import { Skeleton } from "@rneui/themed";
 
 // function to shuffle the array of answers
 const shuffleArr = (array) => {
@@ -17,7 +17,11 @@ const shuffleArr = (array) => {
     }
 };
 
+const skeletonWidth = 302;
+const animationForSkeleton = false;
+
 const Quiz = ({ navigation, route }) => {
+    const [isLoading, setIsLoading] = useState(true);
     const [questions, setQuestions] = useState([]);
     const [options, setOptions] = useState([]);
     const [questionNumber, setQuestionsNumber] = useState(0);
@@ -44,6 +48,7 @@ const Quiz = ({ navigation, route }) => {
         const response = await res.json();
         setQuestions(response.results);
         generateAndShuffleAnswers(response.results[0]);
+        setIsLoading(false);
     };
 
     const handleNextPress = () => {
@@ -95,9 +100,20 @@ const Quiz = ({ navigation, route }) => {
                 <>
                     <View style={styles.top}>
                         <Text style={styles.question}>
-                            Q.{questionNumber + 1}{" "}
-                            {decodeURIComponent(
-                                questions[questionNumber]?.question
+                            {isLoading ? (
+                                <Skeleton
+                                    width={305}
+                                    height={20}
+                                    style={styles.fillerWhite}
+                                    animation="none"
+                                />
+                            ) : (
+                                <>
+                                    Q.{questionNumber + 1}{" "}
+                                    {decodeURIComponent(
+                                        questions[questionNumber]?.question
+                                    )}
+                                </>
                             )}
                         </Text>
                     </View>
@@ -107,15 +123,34 @@ const Quiz = ({ navigation, route }) => {
                             onPress={() => handleSelection(options[0])}
                         >
                             <Text style={styles.option}>
-                                {decodeURIComponent(options[0])}
+                                {isLoading ? (
+                                    <Skeleton
+                                        width={skeletonWidth}
+                                        height={30}
+                                        animation="none"
+                                        style={styles.filler}
+                                    />
+                                ) : (
+                                    decodeURIComponent(options[0])
+                                )}
                             </Text>
                         </TouchableOpacity>
+
                         <TouchableOpacity
                             style={styles.optionButton}
                             onPress={() => handleSelection(options[1])}
                         >
                             <Text style={styles.option}>
-                                {decodeURIComponent(options[1])}
+                                {isLoading ? (
+                                    <Skeleton
+                                        width={skeletonWidth}
+                                        height={30}
+                                        animation="none"
+                                        style={styles.filler}
+                                    />
+                                ) : (
+                                    decodeURIComponent(options[1])
+                                )}
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -123,7 +158,16 @@ const Quiz = ({ navigation, route }) => {
                             onPress={() => handleSelection(options[2])}
                         >
                             <Text style={styles.option}>
-                                {decodeURIComponent(options[2])}
+                                {isLoading ? (
+                                    <Skeleton
+                                        width={skeletonWidth}
+                                        height={30}
+                                        animation="none"
+                                        style={styles.filler}
+                                    />
+                                ) : (
+                                    decodeURIComponent(options[2])
+                                )}
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -131,7 +175,16 @@ const Quiz = ({ navigation, route }) => {
                             onPress={() => handleSelection(options[3])}
                         >
                             <Text style={styles.option}>
-                                {decodeURIComponent(options[3])}
+                                {isLoading ? (
+                                    <Skeleton
+                                        width={skeletonWidth}
+                                        height={30}
+                                        animation="none"
+                                        style={styles.filler}
+                                    />
+                                ) : (
+                                    decodeURIComponent(options[3])
+                                )}
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -150,12 +203,19 @@ const Quiz = ({ navigation, route }) => {
                                 </Text>
                             </TouchableOpacity>
                         ) : (
-                            <TouchableOpacity
-                                onPress={() => handleNextPress()}
-                                style={[styles.notionlayout, styles.shadowProp]}
-                            >
-                                <Text style={styles.notionbutton}>SKIP</Text>
-                            </TouchableOpacity>
+                            !isLoading && (
+                                <TouchableOpacity
+                                    onPress={() => handleNextPress()}
+                                    style={[
+                                        styles.notionlayout,
+                                        styles.shadowProp,
+                                    ]}
+                                >
+                                    <Text style={styles.notionbutton}>
+                                        SKIP
+                                    </Text>
+                                </TouchableOpacity>
+                            )
                         )}
 
                         {/* hide next button and show end button when question number is the last */}
@@ -236,5 +296,12 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
 
         elevation: 5,
+    },
+    filler: {
+        backgroundColor: "#665edd",
+        // width: "100%",
+    },
+    fillerWhite: {
+        backgroundColor: "white",
     },
 });
