@@ -69,12 +69,12 @@ const Home = ({ navigation }) => {
                         <Picker.Item value="21" label="Sports" />
                         <Picker.Item value="22" label="Geography" />
                         <Picker.Item value="23" label="History" />
-                        <Picker.Item value="25" label="Art" />
+                        {/* <Picker.Item value="25" label="Art" /> */}
                         <Picker.Item value="26" label="Celebrities" />
                         <Picker.Item value="27" label="Animals" />
                         <Picker.Item value="28" label="Vehicles" />
                         <Picker.Item value="29" label="Entertainment: Comics" />
-                        <Picker.Item value="30" label="Science: Gadgets" />
+                        {/* <Picker.Item value="30" label="Science: Gadgets" /> */}
                     </Picker>
                 </View>
                 <View style={styles.apiOptionsItemPicker}>
