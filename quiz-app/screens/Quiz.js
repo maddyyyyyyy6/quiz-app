@@ -131,6 +131,7 @@ const Quiz = ({ navigation, route }) => {
                     <View style={styles.options}>
                         <TouchableOpacity
                             style={styles.optionButton}
+                            disabled={isLoading}
                             onPress={() => handleSelection(options[0])}
                         >
                             <Text style={styles.option}>
@@ -150,6 +151,7 @@ const Quiz = ({ navigation, route }) => {
                         <TouchableOpacity
                             style={styles.optionButton}
                             onPress={() => handleSelection(options[1])}
+                            disabled={isLoading}
                         >
                             <Text style={styles.option}>
                                 {isLoading ? (
@@ -168,6 +170,7 @@ const Quiz = ({ navigation, route }) => {
                             <>
                                 <TouchableOpacity
                                     style={styles.optionButton}
+                                    disabled={isLoading}
                                     onPress={() => handleSelection(options[2])}
                                 >
                                     <Text style={styles.option}>
@@ -185,6 +188,7 @@ const Quiz = ({ navigation, route }) => {
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.optionButton}
+                                    disabled={isLoading}
                                     onPress={() => handleSelection(options[3])}
                                 >
                                     <Text style={styles.option}>
@@ -210,6 +214,7 @@ const Quiz = ({ navigation, route }) => {
                                     styles.notionlayout.blue,
                                     styles.notionlayout,
                                     styles.shadowProp,
+                                    styles.showResults,
                                 ]}
                                 onPress={() => showResults()}
                             >
@@ -287,7 +292,7 @@ const styles = StyleSheet.create({
             justifyContent: "center",
         },
         backgroundColor: "#000",
-        borderRadius: 15,
+        borderRadius: 18,
         // width: 70,
         alignItems: "center",
         justifyContent: "center",
@@ -300,6 +305,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         fontFamily: "",
         fontFamily: "Inter_400Regular",
+    },
+    showResults: {
+        marginLeft: "auto",
     },
     shadowProp: {
         shadowColor: "#000000",
