@@ -25,6 +25,8 @@ const Quiz = ({ navigation, route }) => {
     const [questions, setQuestions] = useState([]);
     const [options, setOptions] = useState([]);
     const [questionNumber, setQuestionsNumber] = useState(0);
+    // for handling the true or false question
+    const [isTOF, setisTOF] = useState(false);
     const [isLastQuestion, setIsLastQuestion] = useState(false);
     const [score, setScore] = useState(0);
     const { category, difficulty, type } = route.params;
@@ -35,7 +37,12 @@ const Quiz = ({ navigation, route }) => {
         _type = "";
         if (category_ != "any") _category = `&category=${category}`;
         if (difficulty_ != "any") _difficulty = `&difficulty=${difficulty}`;
-        if (type_ != "any") _type = `&type=${type}`;
+        if (type_ != "any") {
+            _type = `&type=${type}`;
+            if (type == "boolean") {
+                setisTOF(true);
+            }
+        }
         let url = `https://opentdb.com/api.php?amount=10${_category}${_difficulty}${_type}&encode=url3986`;
         return url;
     };
@@ -76,11 +83,15 @@ const Quiz = ({ navigation, route }) => {
 
     const generateAndShuffleAnswers = (_answers) => {
         if (_answers) {
-            let _options = [..._answers?.incorrect_answers];
-            let correct_answer = _answers?.correct_answer;
-            _options.push(correct_answer);
-            shuffleArr(_options);
-            setOptions(_options);
+            if (type == "boolean") {
+                setOptions(["True", "False"]);
+            } else {
+                let _options = [..._answers?.incorrect_answers];
+                let correct_answer = _answers?.correct_answer;
+                _options.push(correct_answer);
+                shuffleArr(_options);
+                setOptions(_options);
+            }
         }
     };
 
@@ -153,40 +164,44 @@ const Quiz = ({ navigation, route }) => {
                                 )}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.optionButton}
-                            onPress={() => handleSelection(options[2])}
-                        >
-                            <Text style={styles.option}>
-                                {isLoading ? (
-                                    <Skeleton
-                                        width={skeletonWidth}
-                                        height={30}
-                                        animation="none"
-                                        style={styles.filler}
-                                    />
-                                ) : (
-                                    decodeURIComponent(options[2])
-                                )}
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.optionButton}
-                            onPress={() => handleSelection(options[3])}
-                        >
-                            <Text style={styles.option}>
-                                {isLoading ? (
-                                    <Skeleton
-                                        width={skeletonWidth}
-                                        height={30}
-                                        animation="none"
-                                        style={styles.filler}
-                                    />
-                                ) : (
-                                    decodeURIComponent(options[3])
-                                )}
-                            </Text>
-                        </TouchableOpacity>
+                        {!isTOF && (
+                            <>
+                                <TouchableOpacity
+                                    style={styles.optionButton}
+                                    onPress={() => handleSelection(options[2])}
+                                >
+                                    <Text style={styles.option}>
+                                        {isLoading ? (
+                                            <Skeleton
+                                                width={skeletonWidth}
+                                                height={30}
+                                                animation="none"
+                                                style={styles.filler}
+                                            />
+                                        ) : (
+                                            decodeURIComponent(options[2])
+                                        )}
+                                    </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.optionButton}
+                                    onPress={() => handleSelection(options[3])}
+                                >
+                                    <Text style={styles.option}>
+                                        {isLoading ? (
+                                            <Skeleton
+                                                width={skeletonWidth}
+                                                height={30}
+                                                animation="none"
+                                                style={styles.filler}
+                                            />
+                                        ) : (
+                                            decodeURIComponent(options[3])
+                                        )}
+                                    </Text>
+                                </TouchableOpacity>
+                            </>
+                        )}
                     </View>
                     <View style={styles.bottom}>
                         {isLastQuestion ? (
